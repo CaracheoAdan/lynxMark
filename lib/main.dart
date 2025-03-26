@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF004AAD), // Azul universitario
       ),
-      home: RegisterSellerScreen(), // Muestra la pantalla de login al iniciar
+      home: LoginScreen(), // Muestra la pantalla de login al iniciar
     );
   }
 }
