@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 // Logo
                 Image.asset('assets/logo.png', height: 130),
-                
+
                 SizedBox(height: 20),
 
                 // Nombre de la app
@@ -23,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF004AAD), // Azul universitario
+                    color: Color(0xFF004AAD),
                   ),
                 ),
 
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 // Eslogan
                 Text(
                   "Tu mercado universitario",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  style: TextStyle(fontSize: 19, color: Colors.grey),
                 ),
 
                 SizedBox(height: 60),
@@ -52,31 +53,60 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Texto "Correo institucional"
+                      Text(
+                        "Correo institucional",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+
                       // Campo Correo Institucional
                       TextField(
                         keyboardType: TextInputType.emailAddress,
+                        readOnly: false,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email, color: Colors.grey),
-                          labelText: "Correo institucional",
-                          hintText: "usuario@itcelaya.edu.mx",
+                          hintText: "No.Control@itcelaya.edu.mx",
+                          filled: true,
+                          fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
                           ),
                         ),
                       ),
 
                       SizedBox(height: 15),
 
+                      // Texto "Contraseña"
+                      Text(
+                        "Contraseña",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+
                       // Campo Contraseña
                       TextField(
                         obscureText: true,
+                        readOnly: false,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                          labelText: "Contraseña",
-                          suffixIcon: Icon(Icons.visibility, color: Colors.grey),
+                          prefixIcon: Icon(Icons.lock, color: Colors.grey), // Ícono de bloqueo
+                          suffixIcon: Icon(Icons.visibility, color: Colors.grey), // Ícono de visibilidad
+                          filled: true,
+                          fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
                           ),
                         ),
                       ),
@@ -107,50 +137,57 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 10),
 
                       // Enlace "Olvidaste tu contraseña"
-                      TextButton(
-                        onPressed: () {
-                          // Acción para recuperar contraseña
-                        },
-                        child: Text(
-                          "¿Olvidaste tu contraseña?",
-                          style: TextStyle(fontSize:16, color:  Color(0xFF004AAD))), // Azul universitario,
+                      Center(
+                        child: TextButton(
+                          onPressed: () {
+                            // Acción para recuperar contraseña
+                          },
+                          child: Text(
+                            "¿Olvidaste tu contraseña?",
+                            style: TextStyle(fontSize: 16, color: Color(0xFF004AAD)),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 10),
+
+                      // Divider
+                      Row(
+                        children: [
+                          Expanded(child: Divider(color: Colors.grey)),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Text("O"),
+                          ),
+                          Expanded(child: Divider(color: Colors.grey)),
+                        ],
+                      ),
+
+                      SizedBox(height: 10),
+
+                      // Enlace "Registrarse aquí" dentro del cuadro
+                      Center(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "¿No tienes una cuenta? ",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            children: [
+                              TextSpan(
+                                text: "Regístrate aquí",
+                                style: TextStyle(
+                                  color: Color(0xFF004AAD),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    // Acción de registro
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                ),
-
-                SizedBox(height: 20),
-
-                // Divider
-                Row(
-                  children: [
-                    Expanded(child: Divider(color: Colors.grey)),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Text("O"),
-                    ),
-                    Expanded(child: Divider(color: Colors.grey)),
-                  ],
-                ),
-
-                SizedBox(height: 10),
-
-                // Enlace "Registrarse"
-                TextButton(
-                  onPressed: () {
-                    // Acción para registrarse
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      text: "¿No tienes una cuenta? ",
-                      style: TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: "Regístrate aquí",
-                          style: TextStyle(color: Color(0xFF004AAD), fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ],
@@ -161,4 +198,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
