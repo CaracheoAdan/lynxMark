@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lince_market/screens/login_screen.dart';
 import 'package:lince_market/screens/product_catalog_screen.dart';
+import 'package:lince_market/screens/product_filter_screen.dart';
 import 'package:lince_market/screens/register_seller_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF004AAD), // Azul universitario
       ),
-      home: LoginScreen(), // Muestra la pantalla de login al iniciar
+      home: ProductFilterScreen(), // Muestra la pantalla de login al iniciar
     );
   }
 }
