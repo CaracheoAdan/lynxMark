@@ -1,7 +1,36 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'product_catalog_screen.dart'; // Asegúrate que la ruta sea correcta
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Por favor llena todos los campos')),
+      );
+      return;
+    }
+
+    // Aquí iría tu lógica de autenticación
+
+    // Navegar a la pantalla de catálogo
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ProductCatalogScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,12 +42,8 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo
                 Image.asset('assets/logo.png', height: 130),
-
                 SizedBox(height: 20),
-
-                // Nombre de la app
                 Text(
                   "Lince Market",
                   style: TextStyle(
@@ -27,18 +52,12 @@ class LoginScreen extends StatelessWidget {
                     color: Color(0xFF004AAD),
                   ),
                 ),
-
                 SizedBox(height: 7),
-
-                // Eslogan
                 Text(
                   "Tu mercado universitario",
                   style: TextStyle(fontSize: 19, color: Colors.grey),
                 ),
-
                 SizedBox(height: 60),
-
-                // Formulario de login
                 Container(
                   padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -55,7 +74,6 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Texto "Correo institucional"
                       Text(
                         "Correo institucional",
                         style: TextStyle(
@@ -65,11 +83,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 5),
-
-                      // Campo Correo Institucional
                       TextField(
+                        controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        readOnly: false,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email, color: Colors.grey),
                           hintText: "No.Control@itcelaya.edu.mx",
@@ -81,10 +97,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 15),
-
-                      // Texto "Contraseña"
                       Text(
                         "Contraseña",
                         style: TextStyle(
@@ -94,14 +107,13 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 5),
-
-                      // Campo Contraseña
                       TextField(
+                        controller: _passwordController,
                         obscureText: true,
-                        readOnly: false,
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock, color: Colors.grey), // Ícono de bloqueo
-                          suffixIcon: Icon(Icons.visibility, color: Colors.grey), // Ícono de visibilidad
+                          prefixIcon: Icon(Icons.lock, color: Colors.grey),
+                          suffixIcon:
+                              Icon(Icons.visibility, color: Colors.grey),
                           filled: true,
                           fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
@@ -110,18 +122,13 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 20),
-
-                      // Botón de Iniciar Sesión
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            // Acción del login
-                          },
+                          onPressed: _login,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF004AAD), // Azul universitario
+                            backgroundColor: Color(0xFF004AAD),
                             padding: EdgeInsets.symmetric(vertical: 15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -133,10 +140,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 10),
-
-                      // Enlace "Olvidaste tu contraseña"
                       Center(
                         child: TextButton(
                           onPressed: () {
@@ -144,14 +148,12 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Text(
                             "¿Olvidaste tu contraseña?",
-                            style: TextStyle(fontSize: 16, color: Color(0xFF004AAD)),
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0xFF004AAD)),
                           ),
                         ),
                       ),
-
                       SizedBox(height: 10),
-
-                      // Divider
                       Row(
                         children: [
                           Expanded(child: Divider(color: Colors.grey)),
@@ -162,10 +164,7 @@ class LoginScreen extends StatelessWidget {
                           Expanded(child: Divider(color: Colors.grey)),
                         ],
                       ),
-
                       SizedBox(height: 10),
-
-                      // Enlace "Registrarse aquí" dentro del cuadro
                       Center(
                         child: RichText(
                           text: TextSpan(
