@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lince_market/screens/login_screen.dart';
+import 'package:lince_market/screens/product_catalog_screen.dart';
 import 'package:lince_market/screens/register_seller_screen.dart';
 
 void main() => runApp(const MyApp());
