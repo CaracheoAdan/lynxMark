@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lince_market/screens/product_filter_screen.dart';
 import 'product_catalog_screen.dart'; // Asegúrate que la ruta sea correcta
 
 class LoginScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // Navegar a la pantalla de catálogo
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => ProductCatalogScreen()),
+      MaterialPageRoute(builder: (context) => ProductFilterScreen()),
     );
   }
 

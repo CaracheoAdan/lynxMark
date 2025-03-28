@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lince_market/screens/analysis_panel_screen.dart';
 import 'package:lince_market/screens/login_screen.dart';
 import 'package:lince_market/screens/product_catalog_screen.dart';
 import 'package:lince_market/screens/product_filter_screen.dart';
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF004AAD),
       ),
+<<<<<<< Updated upstream
       home: ProductReviewScreen(), // ← Pantalla principal
+=======
+      home: AnalysisPanelScreen(), // Muestra la pantalla de login al iniciar
+>>>>>>> Stashed changes
     );
   }
 }
