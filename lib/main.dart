@@ -19,11 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF004AAD),
       ),
-<<<<<<< Updated upstream
       home: ProductReviewScreen(), // ← Pantalla principal
-=======
-      home: AnalysisPanelScreen(), // Muestra la pantalla de login al iniciar
->>>>>>> Stashed changes
     );
   }
 }
