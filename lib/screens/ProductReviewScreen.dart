@@ -59,7 +59,6 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
 
   Widget _buildStarRating({double rating = 0}) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: List.generate(5, (index) {
         return Icon(
           index < rating ? Icons.star : Icons.star_border,
@@ -71,105 +70,162 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   }
 
   Widget _buildFilterChips() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ChoiceChip(
-          label: Text('Más recientes'),
-          selected: selectedFilter == 'recientes',
-          onSelected: (_) => setState(() => selectedFilter = 'recientes'),
-        ),
-        ChoiceChip(
-          label: Text('Mejor puntuados'),
-          selected: selectedFilter == 'mejores',
-          onSelected: (_) => setState(() => selectedFilter = 'mejores'),
-        ),
-        ChoiceChip(
-          label: Text('Más útiles'),
-          selected: selectedFilter == 'utiles',
-          onSelected: (_) => setState(() => selectedFilter = 'utiles'),
-        ),
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          ChoiceChip(
+            label: Text('Más recientes'),
+            selected: selectedFilter == 'recientes',
+            onSelected: (_) => setState(() => selectedFilter = 'recientes'),
+          ),
+          SizedBox(width: 8),
+          ChoiceChip(
+            label: Text('Mejor puntuados'),
+            selected: selectedFilter == 'mejores',
+            onSelected: (_) => setState(() => selectedFilter = 'mejores'),
+          ),
+          SizedBox(width: 8),
+          ChoiceChip(
+            label: Text('Más útiles'),
+            selected: selectedFilter == 'utiles',
+            onSelected: (_) => setState(() => selectedFilter = 'utiles'),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hamburguesa Clásica')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Text('Vendido por: Juan Pérez', style: TextStyle(fontSize: 16)),
-            SizedBox(height: 10),
-            Text(
-              'Calificación promedio: ${averageRating.toStringAsFixed(1)} ⭐',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Text('Califica tu compra',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(5, (index) {
-                return IconButton(
-                  icon: Icon(
-                    index < _rating ? Icons.star : Icons.star_border,
-                    color: Colors.amber,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Parte superior con imagen y texto
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assets/hamburguesa.jpg',
+                      width: 90,
+                      height: 80,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  onPressed: () {
-                    setState(() => _rating = index + 1.0);
-                  },
-                );
-              }),
-            ),
-            TextField(
-              controller: _controller,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Comparte tu experiencia con este producto...',
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  SizedBox(width: 18),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hamburguesa Clásica',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Vendido por: Juan Pérez',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                    onPressed: () => _controller.clear(),
-                    child: Text('Limpiar')),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: _submitReview,
-              child: Text('Enviar Reseña'),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-            ),
-            Divider(height: 30),
-            _buildFilterChips(),
-            Divider(),
-            ...reviews.map((review) => Card(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: ListTile(
-                    leading: CircleAvatar(
+              SizedBox(height: 25),
+
+              // Califica tu compra
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Califica tu compra",
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    SizedBox(height: 8),
+                    Row(
+                      children: List.generate(5, (index) {
+                        return IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(
+                            index < _rating ? Icons.star : Icons.star_border,
+                            color: Colors.amber,
+                          ),
+                          onPressed: () {
+                            setState(() => _rating = index + 1.0);
+                          },
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 8),
+                    TextField(
+                      controller: _controller,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: 'Comparte tu experiencia con este producto...',
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _submitReview,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF004AAD),
+                          padding: EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        child: Text("Enviar Reseña",
+                            style: TextStyle(color: Colors.white)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              _buildFilterChips(),
+              SizedBox(height: 12),
+              ...reviews.map((review) => Container(
+                margin: EdgeInsets.only(bottom: 12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CircleAvatar(
                       child: Text(review['name'][0]),
                     ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(review['name'],
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        _buildStarRating(rating: review['rating'].toDouble()),
-                      ],
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(review['name'],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
+                          _buildStarRating(rating: review['rating'].toDouble()),
+                          SizedBox(height: 4),
+                          Text(review['comment']),
+                        ],
+                      ),
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Text(review['comment']),
-                    ),
-                  ),
-                )),
-          ],
+                  ],
+                ),
+              )),
+            ],
+          ),
         ),
       ),
     );
