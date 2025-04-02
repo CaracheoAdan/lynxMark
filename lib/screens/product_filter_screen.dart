@@ -11,22 +11,27 @@ class ProductFilterScreen extends StatelessWidget {
           PopupMenuButton<String>(
             icon: Icon(Icons.menu),
             onSelected: (value) {
-              Navigator.pushNamed(context, value);
+              if (value == 'logout') {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              } else {
+                Navigator.pushNamed(context, value);
+              }
             },
             itemBuilder: (BuildContext context) => [
               PopupMenuItem(value: '/analysis', child: Text('Análisis')),
-              PopupMenuItem(value: '/chat', child: Text('Chat')),
-              PopupMenuItem(value: '/comments', child: Text('Comentarios')),
-              PopupMenuItem(value: '/login', child: Text('Login')),
               PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
               PopupMenuItem(
                   value: '/register', child: Text('Registro Vendedor')),
               PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
               PopupMenuItem(
-                  value: '/technical', child: Text('Soporte Técnico')),
-              PopupMenuItem(
                   value: '/form', child: Text('Formulario de Soporte')),
               PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
             ],
           )
         ],
@@ -52,8 +57,6 @@ class ProductFilterScreen extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
                     SizedBox(height: 10),
-
-                    // Texto "Precio Máximo"
                     Text("Precio Máximo",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14)),
@@ -65,14 +68,10 @@ class ProductFilterScreen extends StatelessWidget {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                            borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
-
                     SizedBox(height: 15),
-
-                    // Texto "Categoría"
                     Text("Categoría",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14)),
@@ -82,8 +81,7 @@ class ProductFilterScreen extends StatelessWidget {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                            borderRadius: BorderRadius.circular(10)),
                       ),
                       value: "Todas las categorías",
                       items: [
@@ -92,17 +90,12 @@ class ProductFilterScreen extends StatelessWidget {
                         "Bebidas",
                         "Accesorios"
                       ]
-                          .map((item) => DropdownMenuItem(
-                                child: Text(item),
-                                value: item,
-                              ))
+                          .map((item) =>
+                              DropdownMenuItem(child: Text(item), value: item))
                           .toList(),
                       onChanged: (_) {},
                     ),
-
                     SizedBox(height: 15),
-
-                    // Texto "Ordenar por"
                     Text("Ordenar por",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14)),
@@ -112,8 +105,7 @@ class ProductFilterScreen extends StatelessWidget {
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                            borderRadius: BorderRadius.circular(10)),
                       ),
                       value: "Más Vendidos",
                       items: [
@@ -122,17 +114,12 @@ class ProductFilterScreen extends StatelessWidget {
                         "Precio (mayor a menor)",
                         "Mejor Valorados"
                       ]
-                          .map((item) => DropdownMenuItem(
-                                child: Text(item),
-                                value: item,
-                              ))
+                          .map((item) =>
+                              DropdownMenuItem(child: Text(item), value: item))
                           .toList(),
                       onChanged: (_) {},
                     ),
-
                     SizedBox(height: 20),
-
-                    // Botón aplicar filtros
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -141,8 +128,7 @@ class ProductFilterScreen extends StatelessWidget {
                           backgroundColor: Color(0xFF004AAD),
                           padding: EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                              borderRadius: BorderRadius.circular(8)),
                         ),
                         child: Text(
                           "Aplicar Filtros",
@@ -156,18 +142,12 @@ class ProductFilterScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(height: 10),
-
-              // Título de productos
               Text(
                 "Productos Disponibles",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-
               SizedBox(height: 15),
-
-              // Catálogo de productos
               GridView.count(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
@@ -189,8 +169,6 @@ class ProductFilterScreen extends StatelessWidget {
           ),
         ),
       ),
-
-      // Menú inferior
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
@@ -207,7 +185,6 @@ class ProductFilterScreen extends StatelessWidget {
     );
   }
 
-  // Tarjeta de producto
   Widget _buildProductCard(
       String name, String price, String rating, String imagePath) {
     return Container(
@@ -219,7 +196,6 @@ class ProductFilterScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Imagen expandible
           Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(12)),

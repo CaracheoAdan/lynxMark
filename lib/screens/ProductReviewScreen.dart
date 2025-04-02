@@ -99,6 +99,38 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Reseñas del Producto'),
+        backgroundColor: Color(0xFF004AAD),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu),
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              } else {
+                Navigator.pushNamed(context, value);
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          )
+        ],
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -125,7 +157,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                     children: [
                       Text(
                         'Hamburguesa Clásica',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       SizedBox(height: 4),
                       Text(
@@ -149,7 +182,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Califica tu compra",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
                     SizedBox(height: 8),
                     Row(
                       children: List.generate(5, (index) {
@@ -170,7 +204,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
                       controller: _controller,
                       maxLines: 4,
                       decoration: InputDecoration(
-                        hintText: 'Comparte tu experiencia con este producto...',
+                        hintText:
+                            'Comparte tu experiencia con este producto...',
                         filled: true,
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -199,31 +234,32 @@ class _ProductReviewScreenState extends State<ProductReviewScreen> {
               _buildFilterChips(),
               SizedBox(height: 12),
               ...reviews.map((review) => Container(
-                margin: EdgeInsets.only(bottom: 12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      child: Text(review['name'][0]),
+                    margin: EdgeInsets.only(bottom: 12),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          child: Text(review['name'][0]),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(review['name'],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black)),
+                              _buildStarRating(
+                                  rating: review['rating'].toDouble()),
+                              SizedBox(height: 4),
+                              Text(review['comment']),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(review['name'],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
-                          _buildStarRating(rating: review['rating'].toDouble()),
-                          SizedBox(height: 4),
-                          Text(review['comment']),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              )),
+                  )),
             ],
           ),
         ),

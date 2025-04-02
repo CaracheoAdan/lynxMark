@@ -9,6 +9,30 @@ class ProductCatalogScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onSelected: (value) {
+              Navigator.pushNamed(context, value);
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/login', child: Text('Login')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -92,7 +116,8 @@ class ProductCatalogScreen extends StatelessWidget {
                     ),
                     child: Text(
                       product.tag!,
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -114,7 +139,8 @@ class ProductCatalogScreen extends StatelessWidget {
                 SizedBox(height: 4),
                 Text(
                   '\$${product.price}',
-                  style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.green, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 4),
                 ElevatedButton(
@@ -151,8 +177,27 @@ class Product {
 }
 
 List<Product> products = [
-  Product(name: 'Hamburguesa Clásica', description: 'Con papas fritas', imagePath: 'assets/burger.jpeg', price: 5.99, tag: 'Más Vendido'),
-  Product(name: 'Smoothie Natural', description: 'Frutas frescas', imagePath: 'assets/smootie.png', price: 3.50, tag: 'Nuevo'),
-  Product(name: 'Pines Decorativos', description: 'Set de 3 unidades', imagePath: 'assets/pins.png', price: 4.99),
-  Product(name: 'Pack de Snacks', description: 'Variedad de dulces', imagePath: 'assets/snacks.png', price: 2.99, tag: 'Oferta'),
+  Product(
+      name: 'Hamburguesa Clásica',
+      description: 'Con papas fritas',
+      imagePath: 'assets/burger.jpeg',
+      price: 5.99,
+      tag: 'Más Vendido'),
+  Product(
+      name: 'Smoothie Natural',
+      description: 'Frutas frescas',
+      imagePath: 'assets/smootie.png',
+      price: 3.50,
+      tag: 'Nuevo'),
+  Product(
+      name: 'Pines Decorativos',
+      description: 'Set de 3 unidades',
+      imagePath: 'assets/pins.png',
+      price: 4.99),
+  Product(
+      name: 'Pack de Snacks',
+      description: 'Variedad de dulces',
+      imagePath: 'assets/snacks.png',
+      price: 2.99,
+      tag: 'Oferta'),
 ];

@@ -4,6 +4,34 @@ class AnalysisPanelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Panel de Análisis"),
+        backgroundColor: Color(0xFF004AAD),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu),
+            onSelected: (value) {
+              Navigator.pushNamed(context, value);
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/login', child: Text('Login')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+        ],
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -11,40 +39,30 @@ class AnalysisPanelScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Encabezado
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 18),
-                decoration: BoxDecoration(
-                  color: Color(0xFF004AAD),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Panel de Análisis",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.notifications, color: Colors.white),
-                        SizedBox(width: 12),
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundImage: AssetImage("assets/user.jpg"),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              // Encabezado del usuario y notificaciones
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Bienvenido",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.notifications, color: Colors.black54),
+                      SizedBox(width: 12),
+                      CircleAvatar(
+                        radius: 18,
+                        backgroundImage: AssetImage("assets/user.jpg"),
+                      ),
+                    ],
+                  ),
+                ],
               ),
 
               SizedBox(height: 16),
 
-              // Contenedor azul con tarjetas grises internas
+              // Tarjetas de estadísticas
               Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -52,27 +70,26 @@ class AnalysisPanelScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
-  children: [
-    _buildStatCard(
-      "Satisfacción",
-      "85%",
-      "+2.5% vs mes anterior",
-      Colors.green,
-      Icons.show_chart,
-      Colors.green,
-    ),
-    SizedBox(width: 12),
-    _buildStatCard(
-      "Comentarios",
-      "324",
-      "Últimos 30 días",
-      Colors.blue,
-      Icons.forum, // ícono de burbuja de comentario
-      Colors.blue,
-    ),
-  ],
-),
-
+                  children: [
+                    _buildStatCard(
+                      "Satisfacción",
+                      "85%",
+                      "+2.5% vs mes anterior",
+                      Colors.green,
+                      Icons.show_chart,
+                      Colors.green,
+                    ),
+                    SizedBox(width: 12),
+                    _buildStatCard(
+                      "Comentarios",
+                      "324",
+                      "Últimos 30 días",
+                      Colors.blue,
+                      Icons.forum,
+                      Colors.blue,
+                    ),
+                  ],
+                ),
               ),
 
               SizedBox(height: 20),
@@ -112,11 +129,11 @@ class AnalysisPanelScreen extends StatelessWidget {
 
               SizedBox(height: 12),
 
-              // Comentario positivo
               _buildCommentCard(
                 name: "Ana García",
                 rating: 4,
-                feedback: "Excelente servicio y productos de calidad. La entrega fue rápida.",
+                feedback:
+                    "Excelente servicio y productos de calidad. La entrega fue rápida.",
                 tags: ["calidad", "rápido"],
                 image: "assets/user1.jpg",
                 status: "Positivo",
@@ -125,7 +142,6 @@ class AnalysisPanelScreen extends StatelessWidget {
 
               SizedBox(height: 10),
 
-              // Comentario negativo
               _buildCommentCard(
                 name: "Carlos Ruiz",
                 rating: 2,
@@ -145,7 +161,8 @@ class AnalysisPanelScreen extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.insert_chart), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none), label: ""),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.notifications_none), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: ""),
         ],
         selectedItemColor: Color(0xFF004AAD),
@@ -157,7 +174,8 @@ class AnalysisPanelScreen extends StatelessWidget {
   }
 
   // Tarjeta estadística
-  Widget _buildStatCard(String title, String value, String subtitle, Color color, IconData icon, Color iconColor) {
+  Widget _buildStatCard(String title, String value, String subtitle,
+      Color color, IconData icon, Color iconColor) {
     return Expanded(
       child: Container(
         padding: EdgeInsets.all(12),
@@ -191,14 +209,12 @@ class AnalysisPanelScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Icono al lado derecho
             Icon(icon, color: iconColor),
           ],
         ),
       ),
     );
   }
-
 
   // Filtros de tiempo
   Widget _buildTimeFilter(String label, bool selected) {
@@ -245,7 +261,9 @@ class AnalysisPanelScreen extends StatelessWidget {
                 radius: 18,
               ),
               SizedBox(width: 10),
-              Expanded(child: Text(name, style: TextStyle(fontWeight: FontWeight.bold))),
+              Expanded(
+                  child: Text(name,
+                      style: TextStyle(fontWeight: FontWeight.bold))),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -254,7 +272,10 @@ class AnalysisPanelScreen extends StatelessWidget {
                 ),
                 child: Text(
                   status,
-                  style: TextStyle(color: statusColor, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: statusColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ],

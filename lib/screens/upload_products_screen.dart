@@ -27,6 +27,34 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
         title: Text('Publicar Producto', style: TextStyle(color: Colors.black)),
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              } else {
+                Navigator.pushNamed(context, value);
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -49,16 +77,20 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.cloud_upload, size: 40, color: Colors.grey[600]),
+                            Icon(Icons.cloud_upload,
+                                size: 40, color: Colors.grey[600]),
                             SizedBox(height: 8),
-                            Text('Toca para subir o arrastrar tus imágenes',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: Colors.grey[600]))
+                            Text(
+                              'Toca para subir o arrastrar tus imágenes',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.grey[600]),
+                            ),
                           ],
                         )
                       : ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.file(File(_image!.path), fit: BoxFit.cover, width: double.infinity),
+                          child: Image.file(File(_image!.path),
+                              fit: BoxFit.cover, width: double.infinity),
                         ),
                 ),
               ),
@@ -70,9 +102,11 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ),
-                validator: (value) => value!.isEmpty ? 'Ingrese el nombre del producto' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Ingrese el nombre del producto' : null,
               ),
               SizedBox(height: 16),
               DropdownButtonFormField(
@@ -82,7 +116,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ),
                 items: ['Comida', 'Electrónica', 'Ropa', 'Otros']
                     .map((category) => DropdownMenuItem(
@@ -100,7 +135,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ),
                 maxLines: 3,
               ),
@@ -113,7 +149,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                   prefixText: '\$ ',
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ),
                 keyboardType: TextInputType.number,
               ),
@@ -135,7 +172,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.symmetric(vertical: 14),
                   ),
                   onPressed: () {
@@ -145,7 +183,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                       );
                     }
                   },
-                  child: Text('Publicar Producto', style: TextStyle(color: Colors.white, fontSize: 16)),
+                  child: Text('Publicar Producto',
+                      style: TextStyle(color: Colors.white, fontSize: 16)),
                 ),
               ),
             ],

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF004AAD),
       ),
-      home: ProductFilterScreen(), // Pantalla principal actualizada
+      home: LoginScreen(), // Pantalla principal actualizada
 
       // Agrega las rutas aquí:
       routes: {
@@ -33,8 +33,6 @@ class MyApp extends StatelessWidget {
         '/filter': (_) => ProductFilterScreen(),
         '/register': (_) => RegisterSellerScreen(),
         '/reviews': (_) => ProductReviewScreen(),
-        // '/chat': (_) => ChatScreen(),
-        // '/comments': (_) => CommentsAndRatingsScreen(),
         '/form': (_) => SupportFormScreen(),
         '/upload': (_) => UploadProductsScreen(),
       },

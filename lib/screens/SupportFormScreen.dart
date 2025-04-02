@@ -7,10 +7,39 @@ class SupportFormScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Soporte Técnico'),
         backgroundColor: Colors.yellow,
+        foregroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              } else {
+                Navigator.pushNamed(context, value);
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          )
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -59,8 +88,10 @@ class SupportFormScreen extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
               items: [
-                DropdownMenuItem(child: Text('Problema Técnico'), value: 'tecnico'),
-                DropdownMenuItem(child: Text('Facturación'), value: 'facturacion'),
+                DropdownMenuItem(
+                    child: Text('Problema Técnico'), value: 'tecnico'),
+                DropdownMenuItem(
+                    child: Text('Facturación'), value: 'facturacion'),
                 DropdownMenuItem(child: Text('Otro'), value: 'otro'),
               ],
               onChanged: (value) {},
@@ -76,7 +107,9 @@ class SupportFormScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                // Aquí podrías abrir un picker de archivos en el futuro
+              },
               child: Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -96,7 +129,9 @@ class SupportFormScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Aquí iría el envío de datos
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow,
                   foregroundColor: Colors.black,

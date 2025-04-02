@@ -15,6 +15,38 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Registro de Vendedor"),
+        backgroundColor: Color(0xFF004AAD),
+        actions: [
+          PopupMenuButton<String>(
+            icon: Icon(Icons.menu),
+            onSelected: (value) {
+              if (value == 'logout') {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/login', (route) => false);
+              } else {
+                Navigator.pushNamed(context, value);
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem(value: '/analysis', child: Text('Análisis')),
+              PopupMenuItem(value: '/catalog', child: Text('Catálogo')),
+              PopupMenuItem(
+                  value: '/register', child: Text('Registro Vendedor')),
+              PopupMenuItem(value: '/reviews', child: Text('Reseñas')),
+              PopupMenuItem(
+                  value: '/form', child: Text('Formulario de Soporte')),
+              PopupMenuItem(value: '/upload', child: Text('Subir Productos')),
+              PopupMenuItem(
+                value: 'logout',
+                child:
+                    Text('Cerrar Sesión', style: TextStyle(color: Colors.red)),
+              ),
+            ],
+          )
+        ],
+      ),
       backgroundColor: Color.fromARGB(255, 204, 230, 215), // Fondo Verde Suave
       body: Center(
         child: SingleChildScrollView(
@@ -140,7 +172,7 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
                       Container(
                         padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: Colors.grey[200], // Fondo gris claro
+                          color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Column(
@@ -148,19 +180,31 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategoryOption("Comida", isComidaSelected,
-                                    (value) => setState(() => isComidaSelected = value)),
-                                _buildCategoryOption("Maquillaje", isMaquillajeSelected,
-                                    (value) => setState(() => isMaquillajeSelected = value)),
+                                _buildCategoryOption(
+                                    "Comida",
+                                    isComidaSelected,
+                                    (value) => setState(
+                                        () => isComidaSelected = value)),
+                                _buildCategoryOption(
+                                    "Maquillaje",
+                                    isMaquillajeSelected,
+                                    (value) => setState(
+                                        () => isMaquillajeSelected = value)),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _buildCategoryOption("Dulces", isDulcesSelected,
-                                    (value) => setState(() => isDulcesSelected = value)),
-                                _buildCategoryOption("Otros", isOtrosSelected,
-                                    (value) => setState(() => isOtrosSelected = value)),
+                                _buildCategoryOption(
+                                    "Dulces",
+                                    isDulcesSelected,
+                                    (value) => setState(
+                                        () => isDulcesSelected = value)),
+                                _buildCategoryOption(
+                                    "Otros",
+                                    isOtrosSelected,
+                                    (value) => setState(
+                                        () => isOtrosSelected = value)),
                               ],
                             ),
                           ],
@@ -176,13 +220,14 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
                           onPressed: () {
                             // Acción para registrar vendedor
                           },
-                          icon: Icon(Icons.person_add,size: 20, color: Colors.white), // Ícono de usuario
+                          icon: Icon(Icons.person_add,
+                              size: 20, color: Colors.white),
                           label: Text(
                             "Registrarse como vendedor",
-                            style: TextStyle(fontSize: 20, color: Colors.white), // Texto en blanco
+                            style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF004AAD), // Azul universitario
+                            backgroundColor: Color(0xFF004AAD),
                             padding: EdgeInsets.symmetric(vertical: 15),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -202,7 +247,8 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
   }
 
   // Widget para los checkboxes de categorías en cajas
-  Widget _buildCategoryOption(String title, bool value, Function(bool) onChanged) {
+  Widget _buildCategoryOption(
+      String title, bool value, Function(bool) onChanged) {
     return Expanded(
       child: GestureDetector(
         onTap: () {
@@ -217,7 +263,7 @@ class _RegisterSellerScreenState extends State<RegisterSellerScreen> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: value ? Color(0xFF004AAD) : Colors.grey, // Cambia el borde si está seleccionado
+              color: value ? Color(0xFF004AAD) : Colors.grey,
               width: 2,
             ),
           ),
