@@ -7,7 +7,6 @@ import 'package:lince_market/screens/register_seller_screen.dart';
 import 'package:lince_market/screens/ProductReviewScreen.dart';
 import 'package:lince_market/screens/chat_screen.dart';
 import 'package:lince_market/screens/comments_and_ratings_screen.dart';
-import 'package:lince_market/screens/technical_support_screen.dart';
 import 'package:lince_market/screens/SupportFormScreen.dart';
 import 'package:lince_market/screens/upload_products_screen.dart';
 
@@ -36,7 +35,6 @@ class MyApp extends StatelessWidget {
         '/reviews': (_) => ProductReviewScreen(),
         // '/chat': (_) => ChatScreen(),
         // '/comments': (_) => CommentsAndRatingsScreen(),
-        // '/technical': (_) => TechnicalSupportScreen(),
         '/form': (_) => SupportFormScreen(),
         '/upload': (_) => UploadProductsScreen(),
       },
