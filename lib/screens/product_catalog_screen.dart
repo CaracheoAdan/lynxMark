@@ -180,24 +180,24 @@ List<Product> products = [
   Product(
       name: 'Hamburguesa Clásica',
       description: 'Con papas fritas',
-      imagePath: 'assets/burger.jpeg',
+      imagePath: 'assets/hamburguesa.jpg',
       price: 5.99,
       tag: 'Más Vendido'),
   Product(
       name: 'Smoothie Natural',
       description: 'Frutas frescas',
-      imagePath: 'assets/smootie.png',
+      imagePath: 'assets/smoothie.jpg',
       price: 3.50,
       tag: 'Nuevo'),
   Product(
       name: 'Pines Decorativos',
       description: 'Set de 3 unidades',
-      imagePath: 'assets/pins.png',
+      imagePath: 'assets/pines.jpg',
       price: 4.99),
   Product(
       name: 'Pack de Snacks',
       description: 'Variedad de dulces',
-      imagePath: 'assets/snacks.png',
+      imagePath: 'assets/snacks.jpg',
       price: 2.99,
       tag: 'Oferta'),
 ];

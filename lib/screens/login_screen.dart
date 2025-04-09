@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:lince_market/screens/product_filter_screen.dart';
-import 'product_catalog_screen.dart'; // Asegúrate que la ruta sea correcta
+import 'package:lince_market/screens/account_type_screen.dart';
+import 'product_catalog_screen.dart'; 
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,12 +23,9 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    // Aquí iría tu lógica de autenticación
-
-    // Navegar a la pantalla de catálogo
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => ProductFilterScreen()),
+      MaterialPageRoute(builder: (context) => ProductCatalogScreen()),
     );
   }
 
@@ -113,8 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         obscureText: true,
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                          suffixIcon:
-                              Icon(Icons.visibility, color: Colors.grey),
+                          suffixIcon: Icon(Icons.visibility, color: Colors.grey),
                           filled: true,
                           fillColor: Colors.grey[200],
                           border: OutlineInputBorder(
@@ -150,7 +146,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Text(
                             "¿Olvidaste tu contraseña?",
                             style: TextStyle(
-                                fontSize: 16, color: Color(0xFF004AAD)),
+                              fontSize: 16,
+                              color: Color(0xFF004AAD),
+                            ),
                           ),
                         ),
                       ),
@@ -177,10 +175,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextStyle(
                                   color: Color(0xFF004AAD),
                                   fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    // Acción de registro
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AccountTypeScreen(),
+                                      ),
+                                    );
                                   },
                               ),
                             ],

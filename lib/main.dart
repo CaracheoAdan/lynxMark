@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lince_market/screens/account_type_screen.dart';
 import 'package:lince_market/screens/analysis_panel_screen.dart';
 import 'package:lince_market/screens/login_screen.dart';
 import 'package:lince_market/screens/product_catalog_screen.dart';
 import 'package:lince_market/screens/product_filter_screen.dart';
+import 'package:lince_market/screens/register_buyer_screen.dart';
 import 'package:lince_market/screens/register_seller_screen.dart';
 import 'package:lince_market/screens/ProductReviewScreen.dart';
 import 'package:lince_market/screens/chat_screen.dart';
-import 'package:lince_market/screens/comments_and_ratings_screen.dart';
 import 'package:lince_market/screens/SupportFormScreen.dart';
 import 'package:lince_market/screens/upload_products_screen.dart';
 
